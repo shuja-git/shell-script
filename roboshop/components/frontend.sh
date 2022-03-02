@@ -26,7 +26,14 @@
 echo Frontend setup
 #To Install Nginx.
 yum install nginx -y
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+if [ $? -ne 0 ]; then
+  echo -e "\e[1;31mNginx install failed"
+fi
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
+if [ $? -ne 0 ]; then
+  echo -e "\e[1;31mDownload frontend failed"
+fi
+
 cd /usr/share/nginx/html
 rm -rf *
 unzip /tmp/frontend.zip
