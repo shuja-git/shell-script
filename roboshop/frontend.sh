@@ -23,10 +23,10 @@
 #
 ## systemctl restart nginx
 #--------------------------------
-# to validate if u r root user or normal user
+# check whether script is running as root user or not
 USER_ID=$(id -u)
-if [ "${USER_ID} -ne 0" ]; then
-  echo -e "\e[1;31mYou should be root useer to run this script\e[0m"
+if [ "${USER_ID}" -ne 0 ]; then
+  echo -e "\e[1;31mYou should be root user to run this script\e[0m"
   exit
 fi
 #To Install Nginx.
