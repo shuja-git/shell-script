@@ -7,6 +7,6 @@
 # special variables
 
 echo "script name- ${0} "
-echo "First argument is- ${0}"
-echo "Second argument is- ${1}"
+echo "First argument is- ${1}"
+echo "Second argument is- ${2}"
 echo "number of arguments being passed  ${#}"
