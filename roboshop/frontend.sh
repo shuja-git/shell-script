@@ -23,6 +23,12 @@
 #
 ## systemctl restart nginx
 #--------------------------------
+# to validate if u r root user or normal user
+USER_ID=$(id -u)
+if [ "${USER_ID} -ne 0" ]; then
+  echo -e "\e[1;31mYou should be root useer to run this script\e[0m"
+  exit
+fi
 #To Install Nginx.
 yum install nginx -y
 
