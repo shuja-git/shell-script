@@ -28,10 +28,12 @@ echo Frontend setup
 yum install nginx -y
 if [ $? -ne 0 ]; then
   echo -e "\e[1;31mNginx install failed"
+  exit
 fi
 curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
 if [ $? -ne 0 ]; then
-  echo -e "\e[1;31mDownload frontend failed"
+  echo -e "\e[1;31mDownload frontend failed\e[0m"
+  exit
 fi
 
 cd /usr/share/nginx/html
