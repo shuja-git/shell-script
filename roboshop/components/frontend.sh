@@ -25,6 +25,9 @@
 #--------------------------------
 echo Frontend setup
 
+LOG_FILE=/tmp/roboshop.log
+rm -f ${LOG_FILE}
+
 STAT_CHECK(){
   if [ "${1}" -ne 0 ]; then
     echo -e "\e[1;31m${2} - Failed\e[0m"
@@ -35,7 +38,7 @@ STAT_CHECK(){
 }
 
 #To Install Nginx.
-yum install nginx -y
+yum install nginx -y >>${LOG_FILE}
 STAT_CHECK $? "Nginx installation "
 #if [ $? -ne 0 ]; then
 #  echo -e "\e[1;31mNginx install failed"
