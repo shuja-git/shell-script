@@ -24,17 +24,29 @@
 ## systemctl restart nginx
 #--------------------------------
 echo Frontend setup
+
+STAT_CHECK(){
+  if [ "${1}" -ne 0 ]; then
+    echo -e "\e[1;31m${2}\e[0m"
+    exit 1
+}
+
+
+
+
 #To Install Nginx.
 yum install nginx -y
-if [ $? -ne 0 ]; then
-  echo -e "\e[1;31mNginx install failed"
-  exit
-fi
+STAT_CHECK $? "Nginx installation failed"
+#if [ $? -ne 0 ]; then
+#  echo -e "\e[1;31mNginx install failed"
+#  exit
+#fi
 curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
-if [ $? -ne 0 ]; then
-  echo -e "\e[1;31mDownload frontend failed\e[0m"
-  exit
-fi
+STAT_CHECK $? "Dwonload frontend failed"
+#if [ $? -ne 0 ]; then
+#  echo -e "\e[1;31mDownload frontend failed\e[0m"
+#  exit
+#fi
 
 cd /usr/share/nginx/html
 rm -rf *
