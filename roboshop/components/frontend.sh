@@ -45,7 +45,7 @@ STAT_CHECK $? "Nginx installation "
 #  echo -e "\e[1;31mNginx install failed"
 #  exit
 #fi
-curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" $>>{LOG_FILE}
+curl -f -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>${LOG_FILE}
 STAT_CHECK $? "Dwonload frontend "
 #if [ $? -ne 0 ]; then
 #  echo -e "\e[1;31mDownload frontend failed\e[0m"
