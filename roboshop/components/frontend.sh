@@ -47,21 +47,34 @@ STAT_CHECK $? "Dwonload frontend "
 rm -rf /usr/share/nginx/html/*
 STAT_CHECK $? "Removing old HTML pages"
 
-cd /tmp && unzip /tmp/frontend.zip &>>${LOG_FILE}
+
+# unzip /tmp/frontend.zip
+# mv frontend-main/* .
+# mv static/* .
+cd /tmp && unzip /tmp/frontend.zip
 STAT_CHECK $? "Extracting frontend contents"
 
-#mv frontend-main/* .
-#mv static/* .
-cd /tmp/frontend-main/static/ && cp -r * /usr/share/nginx/html/
-STAT_CHECK $? "Copying frontend content"
+# rm -rf frontend-master static README.md
+# mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
-#rm -rf frontend-master static README.md
-#mv localhost.conf /etc/nginx/default.d/roboshop.conf
-cp /tmp/frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
-STAT_CHECK $? "Update Nginx Config file"
 
-systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
-STAT_CHECK $? "Restart Nginx"
+
+#------------------------------------------------
+#cd /tmp && unzip /tmp/frontend.zip &>>${LOG_FILE}
+#STAT_CHECK $? "Extracting frontend contents"
+#
+##mv frontend-main/* .
+##mv static/* .
+#cd /tmp/frontend-main/static/ && cp -r * /usr/share/nginx/html/
+#STAT_CHECK $? "Copying frontend content"
+#
+##rm -rf frontend-master static README.md
+##mv localhost.conf /etc/nginx/default.d/roboshop.conf
+#cp /tmp/frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+#STAT_CHECK $? "Update Nginx Config file"
+#
+#systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
+#STAT_CHECK $? "Restart Nginx"
 
 
 
