@@ -29,9 +29,10 @@ source components/common.sh
 
 # curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 
-DOWN_REPO mongodb
 #curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
 #STAT_CHECK $? "Download MongoDB repo"
+
+DOWN_REPO mongodb
 
 # yum install -y mongodb-org
 yum install -y mongodb-org &>>${LOG_FILE}
