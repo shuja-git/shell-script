@@ -47,7 +47,7 @@ STAT_CHECK $? "Dwonload frontend "
 rm -rf /usr/share/nginx/html/*
 STAT_CHECK $? "Removing old HTML pages"
 
-cd /tmp && unzip /tmp/frontend.zip &>>${LOG_FILE}
+cd /tmp && unzip -o /tmp/frontend.zip &>>${LOG_FILE}
 STAT_CHECK $? "Extracting frontend contents"
 #mv frontend-main/* .
 #mv static/* .
