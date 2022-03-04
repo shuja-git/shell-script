@@ -26,3 +26,12 @@ source components/common.sh
 
 #Symbol < will take the input from a file and give that input to the command.
 #--------------------------------------------------------------------------
+
+# curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
+STAT_CHECK $? "Download MongoDB repo"
+
+# yum install -y mongodb-org
+yum install -y mongodb-org &>>${LOG_FILE}
+STAT_CHECK $? "MongoDB Installation"
