@@ -9,7 +9,7 @@ STAT_CHECK(){
     echo -e "\e[1m${2} - \e[1;32mSuccess\e[0m"
   fi
 }
-
+# setting hostname for child components
 set-hostname -skip-apply ${COMPONENT}
 
 DOWNLOAD (){
