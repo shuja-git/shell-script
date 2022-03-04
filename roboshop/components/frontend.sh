@@ -52,9 +52,9 @@ cd /usr/share/nginx/html && unzip /tmp/frontend.zip &>>${LOG_FILE}
 STAT_CHECK $? "unzipped frontend"
  mv frontend-main/* . && mv static/* .
  STAT_CHECK $? "moved html contents"
-# mv static/* .
-# rm -rf frontend-master static README.md
-# mv localhost.conf /etc/nginx/default.d/roboshop.conf
+
+mv localhost.conf /etc/nginx/default.d/roboshop.conf
+STAT_CHECK $? "copying HTML contents"
 
 
 #------------------------------------------------
