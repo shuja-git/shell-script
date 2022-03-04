@@ -49,6 +49,7 @@ STAT_CHECK $? "Removing old HTML pages"
 
 
 # unzip /tmp/frontend.zip
+cd /tmp
 unzip /tmp/frontend.zip >>${LOG_FILE}
 STAT_CHECK $? "Extracting frontend contents"
 
