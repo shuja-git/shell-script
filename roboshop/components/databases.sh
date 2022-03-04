@@ -29,10 +29,10 @@ source components/common.sh
 
 # curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 
-#curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
-#STAT_CHECK $? "Download MongoDB repo"
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
+STAT_CHECK $? "Download MongoDB repo"
 
-DOWN_REPO mongodb
+
 
 # yum install -y mongodb-org
 yum install -y mongodb-org &>>${LOG_FILE}
@@ -62,8 +62,9 @@ STAT_CHECK $? "Load Schema"
 #------------------------------------------
 #               REDIS
 #Install Redis.
-DOWN_REPO redis
-# curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
+
+ curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${LOG_FILE}
+STAT_CHECK $? "Download Redis Repo"
 # yum install redis -y
 #Update the BindIP from 127.0.0.1 to 0.0.0.0 in config file /etc/redis.conf & /etc/redis/redis.conf
 
