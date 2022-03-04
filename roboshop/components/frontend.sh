@@ -55,7 +55,7 @@ STAT_CHECK $? "unzipped frontend"
 
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 STAT_CHECK $? "Update Nginx config file"
-systemctl enable nginx && systemctl restart nginx
+systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
 STAT_CHECK $? "Restart Nginx"
 
 #------------------------------------------------
