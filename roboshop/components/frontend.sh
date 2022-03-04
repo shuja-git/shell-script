@@ -48,7 +48,7 @@ rm -rf /usr/share/nginx/html/*
 STAT_CHECK $? "Removing old HTML pages"
 
 
-unzip /tmp/frontend.zip $>>${LOG_FILE}
+unzip /tmp/frontend.zip &>>${LOG_FILE}
 STAT_CHECK $? "unzipped frontend"
 # mv frontend-main/* .
 # mv static/* .
