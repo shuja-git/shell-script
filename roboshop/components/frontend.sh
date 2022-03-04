@@ -48,18 +48,12 @@ rm -rf /usr/share/nginx/html/*
 STAT_CHECK $? "Removing old HTML pages"
 
 
-# unzip /tmp/frontend.zip
-cd /tmp
-unzip /tmp/frontend.zip &>>${LOG_FILE}
-STAT_CHECK $? "Extracting frontend contents"
-
+unzip /tmp/frontend.zip
+STAT_CHECK $? "unzipped frontend"
 # mv frontend-main/* .
 # mv static/* .
-#cp -r /tmp/frontend-main/static/ /usr/share/nginx/html/
-#STAT_CHECK $? "Copying HTML contents"
 # rm -rf frontend-master static README.md
-#mv localhost.conf /etc/nginx/default.d/roboshop.conf
-
+# mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
 
 #------------------------------------------------
