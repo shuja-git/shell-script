@@ -27,6 +27,8 @@ source components/common.sh
 #Symbol < will take the input from a file and give that input to the command.
 #--------------------------------------------------------------------------
 
+echo -e " ---------->>>>>>>>>>>>\e[1;35mMongoDB Setup\e0m ------------<<<<<<<<  "
+
 # curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
@@ -61,6 +63,7 @@ STAT_CHECK $? "Load Schema"
 
 #------------------------------------------
 #               REDIS
+echo -e " ---------->>>>>>>>>>>>\e[1;35mRedis Setup\e0m ------------<<<<<<<<  "
 #Install Redis.
 
  curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${LOG_FILE}
