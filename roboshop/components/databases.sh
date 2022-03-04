@@ -46,6 +46,7 @@ STAT_CHECK $? "Update MongoDB Service"
 # curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
 DOWNLOAD mongodb
 
+
 # systemctl enable mongod
 # systemctl start mongod
 systemctl enable mongod &>>${LOG_FILE} && systemctl restart mongod &>>${LOG_FILE}
