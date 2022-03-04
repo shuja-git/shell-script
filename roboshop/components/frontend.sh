@@ -51,11 +51,12 @@ STAT_CHECK $? "Removing old HTML pages"
 cd /usr/share/nginx/html && unzip /tmp/frontend.zip &>>${LOG_FILE}
 STAT_CHECK $? "unzipped frontend"
  mv frontend-main/* . && mv static/* .
- STAT_CHECK $? "moved html contents"
+ STAT_CHECK $? "copying html contents"
 
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
-STAT_CHECK $? "copying HTML contents"
-
+STAT_CHECK $? "Update Nginx config file"
+systemctl enable nginx && systemctl restart nginx
+STAT_CHECK $? "Restart Nginx"
 
 #------------------------------------------------
 #cd /tmp && unzip /tmp/frontend.zip &>>${LOG_FILE}
