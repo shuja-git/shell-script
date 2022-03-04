@@ -18,7 +18,10 @@ DOWNLOAD (){
   cd /tmp && unzip -o /tmp/${1}.zip &>>${LOG_FILE}
   STAT_CHECK $? "Extracting ${1} Code"
 }
-
+DOWN_REPO() {
+curl -L https://raw.githubusercontent.com/roboshop-devops-project/${1}/main/${1}.repo -o /etc/yum.repos.d/${1}.repo &>>${LOG_FILE}
+STAT_CHECK $? "Download ${1} repo"
+}
 
 
 
