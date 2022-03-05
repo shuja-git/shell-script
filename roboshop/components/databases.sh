@@ -103,8 +103,8 @@ rabbitmqctl add_user roboshop roboshop123 &>>${LOG_FILE}
 STAT_CHECK $? "Create App user in RabbitMQ"
 fi
 
-rabbitmqctl set_user_tags roboshop administrator ${LOG_FILE} && rabbitmqctl
-set_permissions -p / roboshop ".*" ".*" ".*" ${LOG_FILE}
+rabbitmqctl set_user_tags roboshop administrator &>>${LOG_FILE} && rabbitmqctl
+set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG_FILE}
 STAT_CHECK $? "Configure App user permissions"
 
 
