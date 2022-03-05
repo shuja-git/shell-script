@@ -95,10 +95,10 @@ STAT_CHECK $? "RabbitMQ Started"
 #RabbitMQ comes with a default username / password as guest/guest. But this user cannot be used to connect. Hence we need to create one user for the application.
 
 #Create application user
-rabbitmqctl list_users  | grep roboshop
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;33mUser already exists"
-else
+rabbitmqctl list_users  | grep roboshop &>>${LOG_FILE}
+if [ $? -ne 0 ]; then
+#  echo -e "\e[1;33mUser already exists"
+#else
 rabbitmqctl add_user roboshop roboshop123 &>>${LOG_FILE}
 STAT_CHECK $? "Create App user in RabbitMQ"
 fi
