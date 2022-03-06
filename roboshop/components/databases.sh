@@ -148,9 +148,15 @@ STAT_CHECK $? "Started MySQL"
 
 DEFAULT_PASSWORD=$(sudo grep 'temporary password'  /var/log/mysqld.log | awk '{print $NF}')
 
-rm -f /tmp/pass.log
+ echo 'show databases' | mysql -uroot -pRoboShop@1 &>>${LOG_FILE}
+ if [ $? -ne 0 ]; then
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" >/tmp/pass.log
-#mysql -uroot -p"${DEFAULT_PASSWORD}" </tmp/pass.log
-
 mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/pass.log &>>${LOG_FILE}
 STAT_CHECK $? "Setup new root password"
+ fi
+
+
+
+
+
+
