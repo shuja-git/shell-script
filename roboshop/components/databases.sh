@@ -143,6 +143,8 @@ STAT_CHECK $? "Download MySQL repo"
 yum install mysql-community-server -y &>>${LOG_FILE}
 STAT_CHECK $? "Installation MySQL"
 
+systemctl enable mysqld &>>${LOG_FILE} && systemctl start mysqld &>>${LOG_FILE}
+STAT_CHECK $? "Started MySQL"
 
 
 
