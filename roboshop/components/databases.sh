@@ -81,7 +81,7 @@ STAT_CHECK $? "Update Redis config"
 systemctl enable redis &>>${LOG_FILE} && systemctl restart redis &>>${LOG_FILE}
 STAT_CHECK $? "Update Redis"
 
-echo -e " ---------->>>>>>>>>>>>\e[1;35mRabbitMQ Setup\e[0m ------------<<<<<<<<  "
+echo -e " ---------->>>>>>>>>>>>\e[1;35mRabbitMQ Setup\e[0m<<<<<<<<<<<<------------"
 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG_FILE}
 STAT_CHECK $? "Download RabbitMQ repo"
@@ -104,11 +104,46 @@ STAT_CHECK $? "Create App user in RabbitMQ"
 fi
 
 rabbitmqctl set_user_tags roboshop administrator  &>>${LOG_FILE} && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"  &>>${LOG_FILE}
-STAT_CHECK $? "Configure APp User Permissions"
+STAT_CHECK $? "Configure App User Permissions"
 
-#rabbitmqctl set_user_tags roboshop administrator &>>${LOG_FILE} && rabbitmqctl
-#set_permissions -p / roboshop ".*" ".*" ".*" &>>${LOG_FILE}
-#STAT_CHECK $? "Configure App user permissions"
+#----------------------------------
+echo -e " ---------->>>>>>>>>>>>\e[1;35mMySQL Setup\e[0m<<<<<<<<<<<<------------"
+
+#As per the Application need, we are choosing MySQL 5.7 version.
+#
+#Setup MySQL Repo
+## curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
+#
+#Install MySQL
+## yum install mysql-community-server -y
+#
+#Start MySQL.
+## systemctl enable mysqld
+## systemctl start mysqld
+#
+#Now a default root password will be generated and given in the log file.
+## grep temp /var/log/mysqld.log
+#
+#Next, We need to change the default root password in order to start using the database service.
+## mysql_secure_installation
+#
+#You can check the new password working or not using the following command.
+#
+## mysql -u root -p
+#
+#Run the following SQL commands to remove the password policy.
+#> uninstall plugin validate_password;
+
+#-------------------------
+#Setup MySQL Repo
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>${LOG_FILE}
+STAT_CHECK $? "Download MySQL repo"
+
+#Install MySQL
+yum install mysql-community-server -y &>>${LOG_FILE}
+STAT_CHECK $? "Installation MySQL"
+
+
 
 
 
