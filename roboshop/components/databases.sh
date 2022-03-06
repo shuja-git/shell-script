@@ -147,6 +147,9 @@ systemctl enable mysqld &>>${LOG_FILE} && systemctl start mysqld &>>${LOG_FILE}
 STAT_CHECK $? "Started MySQL"
 
 DEFAULT_PASSWORD=$(sudo grep 'temporary password'  /var/log/mysqld.log | awk '{print $NF}')
-echo ${DEFAULT_PASSWORD}
+
+
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'"; >/tmp/pass.log
+mysql -uroot -p"${DEFAULT_PASSWORD}" </tmp/pass.log
 
 
