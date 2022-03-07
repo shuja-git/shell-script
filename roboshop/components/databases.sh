@@ -133,6 +133,12 @@ echo -e " ---------->>>>>>>>>>>>\e[1;35mMySQL Setup\e[0m<<<<<<<<<<<<------------
 #
 #Run the following SQL commands to remove the password policy.
 #> uninstall plugin validate_password;
+#To download schema, Use the following command
+# curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
+# cd /tmp
+# unzip mysql.zip
+# cd mysql-main
+# mysql -u root -pRoboShop@1 <shipping.sql
 
 #-------------------------
 #Setup MySQL Repo
@@ -160,6 +166,10 @@ if [ $? -eq 0 ]; then
     STAT_CHECK $? "Uninstalled pasword  Plugin"
 fi
 
+DOWNLOAD mysql
 
+cd /tmp/mysql-main
+mysql -u root -pRoboShop@1 <shipping.sql <shipping.sql &>>${LOG_FILE}
+STAT_CHECK $? "Load Schema"
 
 
