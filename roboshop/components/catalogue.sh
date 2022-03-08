@@ -35,36 +35,5 @@
 #-----------------------------------------------------------
 source components/common.sh
 
-yum install nodejs make gcc-c++ -y &>>${LOG_FILE}
-STAT_CHECK $? "Install NodeJS"
-
-id roboshop &>${LOG_FILE}
-if [ $? -ne 0 ]; then
-  useradd roboshop &>>${LOG_FILE}
-  STAT_CHECK $? "Add Application User"
-
-fi
-
-DOWNLOAD catalogue
-
-rm -rf /home/roboshop/catalogue && mkdir -p /home/roboshop/catalogue && cp -r /tmp/catalogue-main/* /home/roboshop/catalogue &>>${LOG_FILE}
-STAT_CHECK $? "Copy Catalogue contents"
-
-cd /home/roboshop/catalogue && npm install --unsafe-perm &>${LOG_FILE}
-STAT_CHECK $? "Install NodeJS dependencies"
-
-chown roboshop:roboshop -R /home/roboshop
-
-
-# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-# systemctl daemon-reload
-# systemctl start catalogue
-# systemctl enable catalogue
-
-sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>{LOG_FILE} && mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>{LOG_FILE}
-STAT_CHECK $? "Update systemd Config file"
-
-systemctl daemon-reload &>>{LOG_FILE} && systemctl start catalogue &>>{LOG_FILE} && systemctl enable catalogue &>>${LOG_FILE}
-STAT_CHECK $? "Update catalogue Service"
-
+Nodejs catalogue
 

@@ -19,6 +19,43 @@ DOWNLOAD (){
   STAT_CHECK $? "Extracting ${1} Code"
 }
 
+Nodejs() {
+component=${1}
+yum install nodejs make gcc-c++ -y &>>${LOG_FILE}
+STAT_CHECK $? "Install NodeJS"
+
+id roboshop &>${LOG_FILE}
+if [ $? -ne 0 ]; then
+  useradd roboshop &>>${LOG_FILE}
+  STAT_CHECK $? "Add Application User"
+
+fi
+
+DOWNLOAD catalogue
+
+rm -rf /home/roboshop/${component} && mkdir -p /home/roboshop/${component} && cp -r /tmp/${component}* /home/roboshop/${component} &>>${LOG_FILE}
+STAT_CHECK $? "Copy $${component} contents"
+
+cd /home/roboshop/${component} && npm install --unsafe-perm &>${LOG_FILE}
+STAT_CHECK $? "Install NodeJS dependencies"
+
+chown roboshop:roboshop -R /home/roboshop
+
+
+# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+# systemctl daemon-reload
+# systemctl start catalogue
+# systemctl enable catalogue
+
+sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>{LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>{LOG_FILE}
+STAT_CHECK $? "Update systemd Config file"
+
+systemctl daemon-reload &>>{LOG_FILE} && systemctl start ${component} &>>{LOG_FILE} && systemctl enable ${component} &>>${LOG_FILE}
+STAT_CHECK $? "start ${component} Service"
+
+
+}
+
 
 
 
