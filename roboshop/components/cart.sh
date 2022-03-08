@@ -1,3 +1,5 @@
 #!/bin/bash
 
-echo Cart setup
+source components/common.sh
+
+Nodejs cart
