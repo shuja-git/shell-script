@@ -34,7 +34,7 @@ fi
 DOWNLOAD catalogue
 
 rm -rf /home/roboshop/${component} && mkdir -p /home/roboshop/${component} && cp -r /tmp/${component}* /home/roboshop/${component} &>>${LOG_FILE}
-STAT_CHECK $? "Copy $${component} contents"
+STAT_CHECK $? "Copy ${component} contents"
 
 cd /home/roboshop/${component} && npm install --unsafe-perm &>${LOG_FILE}
 STAT_CHECK $? "Install NodeJS dependencies"
