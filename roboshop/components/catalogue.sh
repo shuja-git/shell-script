@@ -23,6 +23,8 @@
 #$ mv catalogue-main catalogue
 #$ cd /home/roboshop/catalogue
 #$ npm install
+
+
 #NOTE: We need to update the IP address of MONGODB Server in systemd.service file
 #Now, lets set up the service with systemctl.
 
@@ -44,3 +46,16 @@ if [ $? -ne 0 ]; then
 fi
 
 DOWNLOAD catalogue
+
+#$ cd /home/roboshop
+#$ unzip /tmp/catalogue.zip
+#$ mv catalogue-main catalogue
+#$ cd /home/roboshop/catalogue
+#$ npm install
+
+rm -rf /home/roboshop/catalogue && mkdir -p /home/roboshop/catalogue && cp -r /tmp/catalogue-main/* /home/roboshop/catalogue &>>${LOG_FILE}
+STAT_CHECK $? "Copy Catalogue contents"
+
+cd /home/roboshop/catalogue && npm install &>${LOG_FILE}
+STAT_CHECK $? "Install NodeJS dependencies"
+
