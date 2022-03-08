@@ -61,7 +61,7 @@ chown roboshop:roboshop -R /home/roboshop
 # systemctl start catalogue
 # systemctl enable catalogue
 
-sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' shop/catalogue/systemd.service &>>{LOG_FILE} && mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>{LOG_FILE}
+sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' /home/roboshop/catalogue/systemd.service &>>{LOG_FILE} && mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>{LOG_FILE}
 STAT_CHECK $? "Update systemd Config file"
 
 systemctl daemon-reload &>>{LOG_FILE} && systemctl start catalogue &>>{LOG_FILE} && systemctl enable catalogue &>>${LOG_FILE}
