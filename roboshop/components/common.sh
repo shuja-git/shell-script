@@ -40,14 +40,15 @@ STAT_CHECK $? "Install NodeJS dependencies"
 
 chown roboshop:roboshop -R /home/roboshop
 
-sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' -e  's/REDIS_ENDPOINT/redis.roboshop.internal/' -e  's/MONGO_ENDPOINT/mongo.roboshop.internal' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>{LOG_FILE}
+sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongo.roboshop.internal' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
 STAT_CHECK $? "Update systemd Config file"
 
 systemctl daemon-reload &>>{LOG_FILE} && systemctl start ${component} &>>{LOG_FILE} && systemctl enable ${component} &>>${LOG_FILE}
 STAT_CHECK $? "start ${component} Service"
 
 }
-
+#
+#
 
 
 
