@@ -67,7 +67,7 @@ SYSTEMD_SETUP
 
 }
 JAVA() {
-
+component=${1}
 #Install Maven, This will install Java too
  yum install maven -y &>>${LOG_FILE}
  STAT_CHECK $? "Installing Maven"
