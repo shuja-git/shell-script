@@ -18,7 +18,7 @@
  curl -s -f -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
 if [ $? -ne 0 ]; then
    echo -e "\e[1;3131mDownload frontend failed\e[0m"
-   exit
+   exit 1
  fi
 #Deploy in Nginx Default Location.
 #
