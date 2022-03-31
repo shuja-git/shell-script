@@ -3,9 +3,13 @@
 function foo(){
  echo first argument = $1
   echo number of arguments = $#
+  echo value of b = ${b}
+  a = 100
  }
 sample () {
   echo fun2
 }
+b = 200
+echo value of a = ${a}
 foo 123 xyz
 sample
