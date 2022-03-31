@@ -14,9 +14,10 @@ STAT_CHECK(){
  fi
 
 }
+LOG_FILE=/tmp/roboshop.log
+rm -f ${LOG_FILE}
 
-
- yum install nginx -y
+ yum install nginx -y >>${LOG_FILE}
 STAT_CHECK $? "Nginx installation "
 # systemctl enable nginx
 ## systemctl start nginx
