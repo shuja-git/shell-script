@@ -9,7 +9,7 @@
 ## systemctl start nginx
 #Let's download the HTML content that serves the RoboSHop Project UI and deploy under the Nginx path.
 #
- curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+ curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
 Deploy in Nginx Default Location.
 #
 cd /usr/share/nginx/html
