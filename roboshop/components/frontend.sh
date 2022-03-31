@@ -17,13 +17,13 @@ STAT_CHECK(){
 LOG_FILE=/tmp/roboshop.log
 rm -f ${LOG_FILE}
 
- yum install nginx -y >>${LOG_FILE}
+ yum install nginx -y &>>${LOG_FILE}
 STAT_CHECK $? "Nginx installation "
 # systemctl enable nginx
 ## systemctl start nginx
 #Let's download the HTML content that serves the RoboSHop Project UI and deploy under the Nginx path.
 #
- curl -s -f -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
+ curl -s -f -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>{LOG_FILE}
 STAT_CHECK $? "Download Frontend "
 #Deploy in Nginx Default Location.
 #
