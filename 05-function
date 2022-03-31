@@ -1,10 +1,11 @@
 #! /bin/bash
 
 function foo(){
- echo fun1
-}
+ echo first argument = $1
+  echo number of arguments = $#
+ }
 sample () {
   echo fun2
 }
-foo
+foo 123 xyz
 sample
