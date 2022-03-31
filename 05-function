@@ -10,6 +10,7 @@ sample () {
   echo fun2
 }
 b=200
-echo value of a=${a}
+
 foo 123 xyz
+echo value of a=${a}
 sample
