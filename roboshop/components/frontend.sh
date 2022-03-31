@@ -5,21 +5,23 @@
 
 #To Install Nginx.
 #
- yum install nginx -y
- if [ $? -ne 0 ]; then
-#    echo "Nginx installation failed"
-   echo -e "\e[1;31mNginx installation failed\e[0m"
+STAT_CHECK(){
+ if [ $1 -ne 0 ]; then
+   echo -e "\e[1;31m${2}\e[0m"
    exit 1
  fi
+
+}
+
+
+ yum install nginx -y
+STAT_CHECK $? "Nginx installation failed"
 # systemctl enable nginx
 ## systemctl start nginx
 #Let's download the HTML content that serves the RoboSHop Project UI and deploy under the Nginx path.
 #
  curl -s -f -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
-if [ $? -ne 0 ]; then
-   echo -e "\e[1;3131mDownload frontend failed\e[0m"
-   exit 1
- fi
+STAT_CHECK $? "Download Frontend failed"
 #Deploy in Nginx Default Location.
 #
 #
