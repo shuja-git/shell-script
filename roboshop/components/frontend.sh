@@ -7,7 +7,8 @@
 #
  yum install nginx -y
  if [ $? -ne 0 ]; then
-   echo -e "\e[1;31mNginx installation failed\e[0m"
+    echo "Nginx installation failed"
+#   echo -e "\e[1;31mNginx installation failed\e[0m"
    exit
  fi
 # systemctl enable nginx
