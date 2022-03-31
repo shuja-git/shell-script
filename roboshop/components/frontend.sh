@@ -21,6 +21,7 @@ if [ $? -ne 0 ]; then
  fi
 #Deploy in Nginx Default Location.
 #
+#
 cd /usr/share/nginx/html
 rm -rf *
  unzip /tmp/frontend.zip
