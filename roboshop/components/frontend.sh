@@ -1,16 +1,24 @@
 #!/bin/bash
 
-set -e
+#set -e
 #The frontend is the service in RobotShop to serve the web content over Nginx.
 
 #To Install Nginx.
 #
  yum install nginx -y
+ if [ $? -ne 0 ]; then
+   echo -e "\e[1;31mNginx installation failed\e[0m"
+   exit
+ fi
 # systemctl enable nginx
 ## systemctl start nginx
 #Let's download the HTML content that serves the RoboSHop Project UI and deploy under the Nginx path.
 #
  curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zi"
+if [ $? -ne 0 ]; then
+   echo -e "\e[1;3131mDownload frontend failed\e[0m"
+   exit
+ fi
 #Deploy in Nginx Default Location.
 #
 cd /usr/share/nginx/html
