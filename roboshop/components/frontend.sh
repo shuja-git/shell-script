@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #The frontend is the service in RobotShop to serve the web content over Nginx.
-#
+sed -e
 #To Install Nginx.
 #
  yum install nginx -y
