@@ -8,7 +8,8 @@ if [ "${USER_ID}" -ne 0 ]; then
 fi
 
 # check input is provided or not
-export  COMPONENT=${1}
+#export  COMPONENT=${1}
+COMPONENT=${1}
 if [ -z "${COMPONENT}" ]; then
   echo -e "\e[1;31mComponent Input is Missing\e[0m"
   exit
