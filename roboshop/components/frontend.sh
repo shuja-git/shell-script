@@ -10,7 +10,7 @@ STAT_CHECK(){
    echo -e "\e[1;31m${2} - Failed\e[0m"
    exit 1
  else
-   echo -e "\e[1;31m${2} - Success\e[0m"
+   echo -e "\e[1;32m${2} - Success\e[0m"
  fi
 
 }
@@ -28,18 +28,28 @@ STAT_CHECK $? "Download Frontend "
 #Deploy in Nginx Default Location.
 #
 #
-cd /usr/share/nginx/html
-rm -rf *
- unzip /tmp/frontend.zip
- mv frontend-main/* .
- mv static/* .
- rm -rf frontend-master static README.md
- mv localhost.conf /etc/nginx/default.d/roboshop.conf
+rm -rf /usr/share/nginx/html/*
+STAT_CHECK $? "Remove Old HTML pages "
+#rm -rf *
+# unzip /tmp/frontend.zip
+# mv frontend-main/* .
+ cd /tmp && unzip /tmp/frontend.zip &>>${LOG_FILE}
+STAT_CHECK $? "Extracting frontend contents"
+# mv static/* .
+cd /tmp/frontend-main/static/ && cp -r * /usr/share/nginx/html/
+ STAT_CHECK $? "Copying frontend content"
+# rm -rf frontend-master static README.md
+# mv localhost.conf /etc/nginx/default.d/roboshop.conf
 #Finally restart the service once to effect the changes.
 #
- systemctl enable nginx
- systemctl restart nginx
+cp /tmp/frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+STAT_CHECK $? "Update Nginx Config file"
+systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
+STAT_CHECK $? "Restart Nginx"
 
+# systemctl enable nginx
+# systemctl restart nginx
+#
 #--------------------------------
 #echo Frontend setup
 
