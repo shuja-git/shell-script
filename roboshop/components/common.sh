@@ -1,5 +1,10 @@
 #! /bin/bash
 
+DOWNLOAD(){
+  curl -s -L -o /tmp/${1}.zip "https://github.com/roboshop-devops-project/${1}/archive/main.zip"
+}
+
+
 STAT_CHECK(){
  if [ $1 -ne 0 ]; then
    echo -e "\e[1;31m${2} - Failed\e[0m"

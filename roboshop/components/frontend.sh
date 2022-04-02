@@ -12,7 +12,9 @@ STAT_CHECK $? "Nginx installation "
 ## systemctl start nginx
 #Let's download the HTML content that serves the RoboSHop Project UI and deploy under the Nginx path.
 #
- curl -s -f -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>${LOG_FILE}
+# curl -s -f -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>${LOG_FILE}
+DOWNLOAD frontend
+
 STAT_CHECK $? "Download Frontend "
 #Deploy in Nginx Default Location.
 #
