@@ -20,6 +20,10 @@ STAT_CHECK $? "Start MongoDB Service"
 
 DOWNLOAD mongodb
 
+cd /tmp/mongodb-main
+mongo < catalogue.js &>>${LOG_FILE} && mongo < users.js &>>${LOG_FILE}
+STAT_CHECK $? "Load Schema"
+
 
 
 
@@ -30,7 +34,6 @@ DOWNLOAD mongodb
 #STAT_CHECK $? "Start MongoDB Service"
 #
 #cd /tmp/mongodb-main
-#
 #mongo < catalogue.js &>>${LOG_FILE} && mongo < users.js &>>${LOG_FILE}
 #STAT_CHECK $? "Load Schema"
 #
