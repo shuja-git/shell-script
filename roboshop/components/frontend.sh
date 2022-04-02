@@ -22,7 +22,7 @@ STAT_CHECK $? "Remove Old HTML pages "
 #rm -rf *
 # unzip /tmp/frontend.zip
 # mv frontend-main/* .
- cd /tmp && unzip /tmp/frontend.zip &>>${LOG_FILE}
+ cd /tmp && unzip -o /tmp/frontend.zip &>>${LOG_FILE}
 STAT_CHECK $? "Extracting frontend contents"
 # mv static/* .
 cd /tmp/frontend-main/static/ && cp -r * /usr/share/nginx/html/

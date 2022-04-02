@@ -10,8 +10,8 @@ STAT_CHECK $? "Download MongoDB repo"
 yum install -y mongodb-org &>>${LOG_FILE}
 STAT_CHECK $? "MongoDB Installation"
 #
-#sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG_FILE}
-#STAT_CHECK $? "Update MongoDB Service"
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG_FILE}
+STAT_CHECK $? "Update MongoDB Service"
 #
 #DOWNLOAD mongodb
 #
