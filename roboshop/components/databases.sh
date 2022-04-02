@@ -3,12 +3,12 @@
 source components/common.sh
 
 echo -e " ---------->>>>>>>>>>>>\e[1;35mMongoDB Setup\e[0m ------------<<<<<<<<  "
+
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
+STAT_CHECK $? "Download MongoDB repo"
 #
-#curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
-#STAT_CHECK $? "Download MongoDB repo"
-#
-#yum install -y mongodb-org &>>${LOG_FILE}
-#STAT_CHECK $? "MongoDB Installation"
+yum install -y mongodb-org &>>${LOG_FILE}
+STAT_CHECK $? "MongoDB Installation"
 #
 #sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG_FILE}
 #STAT_CHECK $? "Update MongoDB Service"
