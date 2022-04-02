@@ -12,7 +12,7 @@ STAT_CHECK(){
 LOG_FILE=/tmp/roboshop.log
 rm -f ${LOG_FILE}
 
-
+set-hostname -skip-apply ${COMPONENT}
 
 
 
