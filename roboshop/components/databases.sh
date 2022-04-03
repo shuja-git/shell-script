@@ -124,7 +124,8 @@ STAT_CHECK $? "MySQL started"
 #
 #Now a default root password will be generated and given in the log file.
 ## grep temp /var/log/mysqld.log
-#
+DEFAULT_PASSWORD=$(grep 'temporary password'  /var/log/mysqld.log | awk '{print $NF}')
+echo "DEFAULT_PASSWORD" $DEFAULT_PASSWORD
 #Next, We need to change the default root password in order to start using the database service.
 ## mysql_secure_installation
 #
