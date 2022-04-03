@@ -12,8 +12,9 @@ DOWNLOAD(){
 
 STAT_CHECK(){
   LENGTH=$(echo $2 | awk '{print length}')
-  echo $LENGTH
+#  echo $LENGTH
   LEFT=$((${MAX_LENGTH}-${LENGTH}))
+  echo $LEFT
   while [ $LEFT -gt 0 ]; do
     SPACE=$(echo -n "|")
     echo |
