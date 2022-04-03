@@ -1,5 +1,13 @@
 #! /bin/bash
 
+MAX_LENGTH=$(cat ${0} components/databases.sh | grep -v -w cat | grep STAT_CHECK | awk -F '"' '{print $2}' | awk '{print length}' | sort | tail -1 )
+
+if [ ${MAX_LENGTH} -lt 24 ]; then
+    MAX_LENGTH=24
+fi
+
+
+
 DOWNLOAD(){
   curl -s -L -o /tmp/${1}.zip "https://github.com/roboshop-devops-project/${1}/archive/main.zip"
   STAT_CHECK $? "Download ${1} code"
@@ -54,7 +62,7 @@ NODEJS(){
   #NOTE: We need to update the IP address of MONGODB Server in systemd.service file
   #Now, lets set up the service with systemctl.
 
-  sed -i 's/MONGO_DNSNAME/mongo.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
+  sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongo.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
   STAT_CHECK $? "Update SystemD Config file"
 
   # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
