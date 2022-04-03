@@ -3,7 +3,7 @@
 source components/common.sh
 
 MAX_LENGTH=$(cat ${0} components/databases.sh | grep STAT_CHECK | awk -F '"' '{print $2}' | awk '{print length}' | tail -1 )
-
+echo $MAX_LENGTH
 
 #echo -e " ---------->>>>>>>>>>>>\e[1;35mMongoDB Setup\e[0m ------------<<<<<<<<  "
 #
