@@ -11,6 +11,15 @@ DOWNLOAD(){
 
 
 STAT_CHECK(){
+  LENGTH=$(echo $2 | awk '{print length}')
+  LEFT=$((${MAX_LENGTH}-${LENGTH}))
+  while [ $LEFT -gt 0 ]; do
+    SPACE=$(echo -n "|")
+    echo |
+    LEFT=$((${LEFT}-1))
+  done
+  echo $SPACE
+  exit
  if [ $1 -ne 0 ]; then
    echo -e "\e[1m${2} - \e[1;31mFailed\e[0m"
    exit 1

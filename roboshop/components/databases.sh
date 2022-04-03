@@ -2,6 +2,9 @@
 
 source components/common.sh
 
+MAX_LENGTH=$(cat ${0} components/databases.sh | grep STAT_CHECK | awk -F '"' '{print $2}' | awk '{print length}' | tail -1 )
+
+
 #echo -e " ---------->>>>>>>>>>>>\e[1;35mMongoDB Setup\e[0m ------------<<<<<<<<  "
 #
 #curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG_FILE}
