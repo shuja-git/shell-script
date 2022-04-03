@@ -19,8 +19,8 @@ STAT_CHECK(){
     SPACE=$(echo -n "${SPACE}")
     LEFT=$((${LEFT}-1))
   done
-  echo $SPACE
-  exit
+#  echo $SPACE
+#  exit
  if [ $1 -ne 0 ]; then
    echo -e "\e[1m${2}${SPACE} - \e[1;31mFailed\e[0m"
    exit 1
