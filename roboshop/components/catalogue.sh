@@ -8,7 +8,7 @@ if [ ${MAX_LENGTH} -lt 24 ]; then
     MAX_LENGTH=24
 fi
 
-Nodejs catalogue
+NODEJS catalogue
 
 
 ## curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
