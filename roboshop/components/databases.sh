@@ -77,7 +77,7 @@ rabbitmqctl set_user_tags roboshop administrator  &>>${LOG_FILE} && rabbitmqctl 
 STAT_CHECK $? "Configure App User Permissions"
 #
 ##----------------------------------
-echo -e " ---------->>>>>>>>>>>>\e[1;35mMySQL Setup\e[0m<<<<<<<<<<<<------------"
+
 #
 #curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>${LOG_FILE}
 #STAT_CHECK $? "Download MySQL repo"
@@ -112,6 +112,7 @@ echo -e " ---------->>>>>>>>>>>>\e[1;35mMySQL Setup\e[0m<<<<<<<<<<<<------------
 #
 ##=======================================================
 #Setup MySQL Repo
+echo -e " ---------->>>>>>>>>>>>\e[1;35mMySQL Setup\e[0m<<<<<<<<<<<<------------"
  curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
 STAT_CHECK $? "Download MySQL repo"
 #Install MySQL
