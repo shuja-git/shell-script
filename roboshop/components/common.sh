@@ -11,6 +11,7 @@ DOWNLOAD(){
 
 
 STAT_CHECK(){
+  SPACE=""
   LENGTH=$(echo $2 | awk '{print length}')
 # echo "LENGTH= " $LENGTH
   LEFT=$((${MAX_LENGTH}-${LENGTH}))
