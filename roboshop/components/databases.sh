@@ -32,7 +32,7 @@ STAT_CHECK $? "Load Schema"
 echo -e " ---------->>>>>>>>>>>>\e[1;35mRedis Setup\e[0m ------------<<<<<<<<  "
 
 
-curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
+curl -L -s https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
 STAT_CHECK $? "Download Redis Repo"
 
 yum install redis -y &>>${LOG_FILE}
