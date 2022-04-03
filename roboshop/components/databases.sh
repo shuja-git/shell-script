@@ -63,7 +63,7 @@ STAT_CHECK $? "RabbitMQ Started"
 ##Create application user
 rabbitmqctl list_users  | grep roboshop &>>${LOG_FILE}
 if [ $? -eq 0 ]; then
-  echo -e "\e[1;33mUser already exists"
+  echo -e "\e[1;33mUser already exists\e[0m"
 else
 rabbitmqctl add_user roboshop roboshop123 &>>${LOG_FILE}
 STAT_CHECK $? "Create App user in RabbitMQ"
