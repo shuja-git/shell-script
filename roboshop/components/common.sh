@@ -17,7 +17,7 @@ STAT_CHECK(){
   echo "LEFT= " $LEFT
   while [ $LEFT -gt 0 ]; do
     SPACE=$(echo -n "|")
-    echo |
+    echo "|"
     LEFT=$((${LEFT}-1))
   done
   echo $SPACE
