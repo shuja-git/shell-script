@@ -125,14 +125,16 @@ STAT_CHECK $? "MySQL started"
 #Now a default root password will be generated and given in the log file.
 ## grep temp /var/log/mysqld.log
 DEFAULT_PASSWORD=$(grep 'temporary password'  /var/log/mysqld.log | awk '{print $NF}')
-echo "DEFAULT_PASSWORD" $DEFAULT_PASSWORD
+#echo "DEFAULT_PASSWORD" $DEFAULT_PASSWORD
+
 #Next, We need to change the default root password in order to start using the database service.
 ## mysql_secure_installation
-#
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'; >/tmp/pass.sql
+mysql -uroot -p"${DEFAULT_PASSWORD}" </tmp/pass.sql
 #You can check the new password working or not using the following command.
 #
 ## mysql -u root -p
-#
+
 #Run the following SQL commands to remove the password policy.
 #> uninstall plugin validate_password;
 #Setup Needed for Application.
