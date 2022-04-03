@@ -142,6 +142,12 @@ fi
 #Run the following SQL commands to remove the password policy.
 #> uninstall plugin validate_password;
 #Setup Needed for Application.
+echo "show plugins;" | mysql -uroot -pRoboShop@1 2>>${LOG_FILE} | grep validate_password &>>${LOG_FILE}
+if [ $? -eq 0 ]; then
+    echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1 &>>${LOG_FILE}
+    STAT_CHECK $? "Uninstall Password Policy"
+fi
+
 #As per the architecture diagram, MySQL is needed by
 #
 #Shipping Service
