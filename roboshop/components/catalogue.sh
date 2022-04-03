@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#echo Catalogue setup
+echo Catalogue setup
 #
 #This service is responsible for showing the list of items that are to be sold by the RobotShop e-commerce portal.
 #
