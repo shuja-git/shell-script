@@ -2,9 +2,9 @@
 
 source components/common.sh
 
-echo 0=${0}
+#echo 0=${0}
 MAX_LENGTH=$(cat ${0} components/databases.sh | grep -v cat | grep STAT_CHECK | awk -F '"' '{print $2}' | awk '{print length}' | sort | tail -1 )
-echo "MAX_LENGTH= " $MAX_LENGTH
+#echo "MAX_LENGTH= " $MAX_LENGTH
 
 echo -e " ---------->>>>>>>>>>>>\e[1;35mMongoDB Setup\e[0m ------------<<<<<<<<  "
 

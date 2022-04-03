@@ -12,21 +12,20 @@ DOWNLOAD(){
 
 STAT_CHECK(){
   LENGTH=$(echo $2 | awk '{print length}')
- echo "LENGTH= " $LENGTH
+# echo "LENGTH= " $LENGTH
   LEFT=$((${MAX_LENGTH}-${LENGTH}))
-  echo "LEFT= " $LEFT
+#  echo "LEFT= " $LEFT
   while [ $LEFT -gt 0 ]; do
-    SPACE=$(echo -n "${SPACE}|")
-
+    SPACE=$(echo -n "${SPACE}")
     LEFT=$((${LEFT}-1))
   done
   echo $SPACE
   exit
  if [ $1 -ne 0 ]; then
-   echo -e "\e[1m${2} - \e[1;31mFailed\e[0m"
+   echo -e "\e[1m${2}${SPACE} - \e[1;31mFailed\e[0m"
    exit 1
  else
-   echo -e "\e[1m${2} - \e[1;32mSuccess\e[0m"
+   echo -e "\e[1m${2}${SPACE} - \e[1;32mSuccess\e[0m"
  fi
 
 }
