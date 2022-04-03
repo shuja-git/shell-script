@@ -28,6 +28,7 @@ STAT_CHECK $? "Copy catalogue Contents"
 cd /home/roboshop/catalogue && npm install --unsafe-perm &>>${LOG_FILE}
 STAT_CHECK $? "Install Nodejs Dependencies"
 
+chown roboshop:roboshop -R /home/roboshop
 
 
 #NOTE: We need to update the IP address of MONGODB Server in systemd.service file
