@@ -11,7 +11,7 @@ MAX_LENGTH=$(cat ${0} components/databases.sh | grep -v -W cat | grep STAT_CHECK
  yum install nodejs make gcc-c++ -y &>>${LOG_FILE}
 STAT_CHECK $? "Install Nodejs"
 
-id roboshop &>>&{LOG_FILE}
+id roboshop &>>${LOG_FILE}
 if [ $? -ne 0 ]; then
  useradd roboshop &>>${LOG_FILE}
  STAT_CHECK $? "Add Application User"
