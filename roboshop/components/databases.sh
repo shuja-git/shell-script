@@ -46,42 +46,27 @@ STAT_CHECK $? "Update Redis"
 systemctl enable redis &>>${LOG_FILE} &&  systemctl start redis &>>${LOG_FILE}
 STAT_CHECK $? "Redis Started"
 
-#===================================================
-#curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${LOG_FILE}
-#STAT_CHECK $? "Download Redis Repo"
+
+
+echo -e " ---------->>>>>>>>>>>>\e[1;35mRabbitMQ Setup\e[0m<<<<<<<<<<<<------------"
+
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG_FILE}
+STAT_CHECK $? "Download RabbitMQ repo"
 #
-#yum install redis -y &>>${LOG_FILE}
-#STAT_CHECK $? "Install Redis"
-#
-#
-#sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>>${LOG_FILE}
-#STAT_CHECK $? "Update Redis config"
-#
-##Start Redis Database
-#
-#systemctl enable redis &>>${LOG_FILE} && systemctl start redis &>>${LOG_FILE}
-#STAT_CHECK $? "Update Redis"
-#
-#
-#echo -e " ---------->>>>>>>>>>>>\e[1;35mRabbitMQ Setup\e[0m<<<<<<<<<<<<------------"
-#
-#curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>${LOG_FILE}
-#STAT_CHECK $? "Download RabbitMQ repo"
-#
-#yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y rabbitmq-server -y &>>${LOG_FILE}
-#STAT_CHECK $? "Install Erlang and RabbitMQ "
-#
-#
-#systemctl enable rabbitmq-server &>>${LOG_FILE} &&  systemctl restart rabbitmq-server
-#STAT_CHECK $? "RabbitMQ Started"
+yum install https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y rabbitmq-server -y &>>${LOG_FILE}
+STAT_CHECK $? "Install Erlang and RabbitMQ "
+
+
+systemctl enable rabbitmq-server &>>${LOG_FILE} &&  systemctl restart rabbitmq-server &>>${LOG_FILE}
+STAT_CHECK $? "RabbitMQ Started"
 #
 ##Create application user
 #rabbitmqctl list_users  | grep roboshop &>>${LOG_FILE}
 #if [ $? -ne 0 ]; then
 ##  echo -e "\e[1;33mUser already exists"
 ##else
-#rabbitmqctl add_user roboshop roboshop123 &>>${LOG_FILE}
-#STAT_CHECK $? "Create App user in RabbitMQ"
+rabbitmqctl add_user roboshop roboshop123 &>>${LOG_FILE}
+STAT_CHECK $? "Create App user in RabbitMQ"
 #fi
 #
 #rabbitmqctl set_user_tags roboshop administrator  &>>${LOG_FILE} && rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"  &>>${LOG_FILE}
