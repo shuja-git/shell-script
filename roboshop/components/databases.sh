@@ -154,11 +154,11 @@ fi
 #So we need to load that schema into the database, So those applications will detect them and run accordingly.
 #
 #To download schema, Use the following command
-#
+DOWNLOAD mysql
+
 ## curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
 #Load the schema for Services.
 
-# cd /tmp
-# unzip mysql.zip
-# cd mysql-main
-# mysql -u root -pRoboShop@1 <shipping.sql
+ cd /tmp/mysql-main
+ mysql -u root -pRoboShop@1 <shipping.sql &>>${LOG_FILE}
+ STAT_CHECK $? "Load Schema"
