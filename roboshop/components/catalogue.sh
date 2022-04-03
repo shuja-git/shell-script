@@ -1,22 +1,20 @@
 #!/bin/bash
 
 echo Catalogue setup
+source components/common.sh
+MAX_LENGTH=$(cat ${0} components/databases.sh | grep -v cat | grep STAT_CHECK | awk -F '"' '{print $2}' | awk '{print length}' | sort | tail -1 )
+
+
+
+
+# curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
+ yum install nodejs make gcc-c++ -y &>>${LOG_FILE}
+STAT_CHECK $? "Install Nodejs"
+
+ useradd roboshop &>>${LOG_FILE}
+STAT_CHECK $? "Add Application User"
 #
-#This service is responsible for showing the list of items that are to be sold by the RobotShop e-commerce portal.
-#
-#This service is written in NodeJS, Hence need to install NodeJS in the system.
-#
-## curl -fsSL https://rpm.nodesource.com/setup_lts.x | bash -
-## yum install nodejs make gcc-c++ -y
-#Let's now set up the catalogue application.
-#
-#As part of operating system standards, we run all the applications and databases as a normal user but not with root user.
-#
-#So to run the catalogue service we choose to run as a normal user and that user name should be more relevant to the project. Hence we will use roboshop as the username to run the service.
-#
-## useradd roboshop
-#So let's switch to the roboshop user and run the following commands.
-#
+DOWNLOAD catalogue
 #$ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
 #$ cd /home/roboshop
 #$ unzip /tmp/catalogue.zip
@@ -33,7 +31,7 @@ echo Catalogue setup
 # systemctl start catalogue
 # systemctl enable catalogue
 #-----------------------------------------------------------
-source components/common.sh
+
 
 Nodejs catalogue
 
