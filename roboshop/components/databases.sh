@@ -129,7 +129,7 @@ DEFAULT_PASSWORD=$(grep 'temporary password'  /var/log/mysqld.log | awk '{print 
 
 #Next, We need to change the default root password in order to start using the database service.
 ## mysql_secure_installation
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'; >/tmp/pass.sql
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" >/tmp/pass.sql
 mysql -uroot -p"${DEFAULT_PASSWORD}" </tmp/pass.sql
 #You can check the new password working or not using the following command.
 #
