@@ -106,7 +106,19 @@ STAT_CHECK $? "Compile the Java Code"
 SYSTEMD_SETUP
 
 }
+PYTHON(){
+  component=${1}
+    yum install python36 gcc python3-devel -y &>>${LOG_FILE}
+    STAT_CHECK $? "Install python3"
 
+    APP_USER_SETUP
+
+  cd /home/roboshop/${component} && pip3 install -r requirements.txt &>>${LOG_FILE}
+  STAT_CHECK $? "Install python dependencies"
+
+  SYSTEMD_SETUP
+
+}
 
 #===============================================
 #LOG_FILE=/tmp/roboshop.log
