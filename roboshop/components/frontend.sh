@@ -23,6 +23,7 @@ STAT_CHECK $? "Copy Nginx Config file"
           -e '/shipping/ s/localhost/shipping.roboshop.internal/' \
           -e '/payment/ s/localhost/payment/' /etc/nginx/default.d/roboshop.conf
   STAT_CHECK $? "Update Nginx Config file"
+
 systemctl enable nginx &>>${LOG_FILE} && systemctl restart nginx &>>${LOG_FILE}
 STAT_CHECK $? "Restart Nginx"
 
