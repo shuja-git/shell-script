@@ -1,10 +1,34 @@
 #! /bin/bash
 
+LOG_FILE=/tmp/roboshop.log
+rm -f ${LOG_FILE}
+
 MAX_LENGTH=$(cat ${0} components/databases.sh | grep -v -w cat | grep STAT_CHECK | awk -F '"' '{print $2}' | awk '{print length}' | sort | tail -1 )
 
 if [ ${MAX_LENGTH} -lt 24 ]; then
     MAX_LENGTH=24
 fi
+STAT_CHECK(){
+  SPACE=""
+  LENGTH=$(echo $2 | awk '{print length}')
+# echo "LENGTH= " $LENGTH
+  LEFT=$((${MAX_LENGTH}-${LENGTH}))
+#  echo "LEFT= " $LEFT
+  while [ $LEFT -gt 0 ]; do
+    SPACE=$(echo -n "${SPACE}")
+    LEFT=$((${LEFT}-1))
+  done
+#  echo $SPACE
+#  exit
+ if [ $1 -ne 0 ]; then
+   echo -e "\e[1m${2}${SPACE} - \e[1;31mFailed\e[0m"
+   exit 1
+ else
+   echo -e "\e[1m${2}${SPACE} - \e[1;32mSuccess\e[0m"
+ fi
+
+}
+set-hostname -skip-apply ${COMPONENT}
 
 SYSTEMD_SETUP(){
    chown roboshop:roboshop -R /home/roboshop
@@ -53,26 +77,6 @@ APP_USER_SETUP(){
 }
 
 
-STAT_CHECK(){
-  SPACE=""
-  LENGTH=$(echo $2 | awk '{print length}')
-# echo "LENGTH= " $LENGTH
-  LEFT=$((${MAX_LENGTH}-${LENGTH}))
-#  echo "LEFT= " $LEFT
-  while [ $LEFT -gt 0 ]; do
-    SPACE=$(echo -n "${SPACE}")
-    LEFT=$((${LEFT}-1))
-  done
-#  echo $SPACE
-#  exit
- if [ $1 -ne 0 ]; then
-   echo -e "\e[1m${2}${SPACE} - \e[1;31mFailed\e[0m"
-   exit 1
- else
-   echo -e "\e[1m${2}${SPACE} - \e[1;32mSuccess\e[0m"
- fi
-
-}
 
 NODEJS(){
   component=${1}
@@ -91,10 +95,9 @@ NODEJS(){
 
 }
 
-LOG_FILE=/tmp/roboshop.log
-rm -f ${LOG_FILE}
 
-set-hostname -skip-apply ${COMPONENT}
+
+
 
 JAVA(){
   component=${1}
