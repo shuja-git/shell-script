@@ -22,7 +22,7 @@ SYSTEMD_SETUP(){
     STAT_CHECK $? "Update SystemD Config file"
 
     # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-    systemctl daemon-reload &>>${LOG_FILE} && systemctl start ${component} &>>${LOG_FILE} && systemctl enable ${component} &>>${LOG_FILE}
+    systemctl daemon-reload &>>${LOG_FILE} && systemctl restart ${component} &>>${LOG_FILE} && systemctl enable ${component} &>>${LOG_FILE}
     STAT_CHECK $? "Start ${component} Service"
 }
 
