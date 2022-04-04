@@ -44,7 +44,7 @@ STAT_CHECK $? "Update Redis"
 
 #Start Redis Database
 
-systemctl enable redis &>>${LOG_FILE} &&  systemctl start redis &>>${LOG_FILE}
+systemctl enable redis &>>${LOG_FILE} &&  systemctl restart redis &>>${LOG_FILE}
 STAT_CHECK $? "Redis Started"
 
 
