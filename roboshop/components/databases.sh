@@ -39,7 +39,7 @@ STAT_CHECK $? "Download Redis Repo"
 yum install redis -y &>>${LOG_FILE}
 STAT_CHECK $? "Redis Installation"
 #Update the BindIP from 127.0.0.1 to 0.0.0.0 in config file /etc/redis.conf & /etc/redis/redis.conf
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${LOG_FILE}
 STAT_CHECK $? "Update Redis"
 
 #Start Redis Database
