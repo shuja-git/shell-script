@@ -14,7 +14,10 @@ SYSTEMD_SETUP(){
            -e 's/MONGO_ENDPOINT/mongo.roboshop.internal/' \
            -e's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/'\
            -e 's/CARTENDPOINT/cart.roboshop.internal/' \
-           -e 's/DBHOST/mysql.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
+           -e 's/DBHOST/mysql.roboshop.internal/' \
+           -e 's/CARTHOST/cart.roboshop.internal/' \
+           -e 's/USERHOST/user.roboshop.internal/' \
+           -e 's/AMQPHOST/rabbitmq.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
     STAT_CHECK $? "Update SystemD Config file"
 
     # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
