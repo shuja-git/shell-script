@@ -6,6 +6,20 @@ if [ ${MAX_LENGTH} -lt 24 ]; then
     MAX_LENGTH=24
 fi
 
+SYSTEMD_SETUP(){
+   chown roboshop:roboshop -R /home/roboshop
+
+   sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' \
+           -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' \
+           -e 's/MONGO_ENDPOINT/mongo.roboshop.internal/' \
+           -e's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
+    STAT_CHECK $? "Update SystemD Config file"
+
+    # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+    systemctl daemon-reload &>>${LOG_FILE} && systemctl start ${component} &>>${LOG_FILE} && systemctl enable ${component} &>>${LOG_FILE}
+    STAT_CHECK $? "Start ${component} Service"
+}
+
 
 
 DOWNLOAD(){
@@ -15,6 +29,18 @@ DOWNLOAD(){
   unzip -o /tmp/${1}.zip &>>${LOG_FILE}
   STAT_CHECK $? "Extract ${1} code"
 
+   rm -rf /home/roboshop/${component} && mkdir -p /home/roboshop/${component} && cp -r /tmp/${component}-main/* /home/roboshop/${component} &>>${LOG_FILE}
+    STAT_CHECK $? "Copy ${component} Contents"
+
+}
+APP_USER_SETUP(){
+
+  id roboshop &>>${LOG_FILE}
+    if [ $? -ne 0 ]; then
+     useradd roboshop &>>${LOG_FILE}
+     STAT_CHECK $? "Add Application User"
+    fi
+    DOWNLOAD ${component}
 }
 
 
@@ -38,36 +64,25 @@ STAT_CHECK(){
  fi
 
 }
+
 NODEJS(){
   component=${1}
    yum install nodejs make gcc-c++ -y &>>${LOG_FILE}
   STAT_CHECK $? "Install Nodejs"
 
-  id roboshop &>>${LOG_FILE}
-  if [ $? -ne 0 ]; then
-   useradd roboshop &>>${LOG_FILE}
-   STAT_CHECK $? "Add Application User"
-  fi
+  APP_USER_SETUP
 
-  #
-  DOWNLOAD ${component}
-  rm -rf /home/roboshop/${component} && mkdir -p /home/roboshop/${component} && cp -r /tmp/${component}-main/* /home/roboshop/${component} &>>${LOG_FILE}
-  STAT_CHECK $? "Copy ${component} Contents"
+
   cd /home/roboshop/${component} && npm install --unsafe-perm &>>${LOG_FILE}
   STAT_CHECK $? "Install Nodejs Dependencies"
 
-  chown roboshop:roboshop -R /home/roboshop
 
 
   #NOTE: We need to update the IP address of MONGODB Server in systemd.service file
   #Now, lets set up the service with systemctl.
 
-  sed -i -e 's/MONGO_DNSNAME/mongo.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongo.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' /home/roboshop/${component}/systemd.service &>>${LOG_FILE} && mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${LOG_FILE}
-  STAT_CHECK $? "Update SystemD Config file"
+ SYSTEMD_SETUP
 
-  # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-  systemctl daemon-reload &>>${LOG_FILE} && systemctl start ${component} &>>${LOG_FILE} && systemctl enable ${component} &>>${LOG_FILE}
-  STAT_CHECK $? "Start ${component} Service"
 
 }
 
@@ -76,6 +91,19 @@ rm -f ${LOG_FILE}
 
 set-hostname -skip-apply ${COMPONENT}
 
+JAVA(){
+  component=${1}
+  yum install maven -y &>>${LOG_FILE}
+  STAT_CHECK $? "Install Maven"
+
+  APP_USER_SETUP
+
+cd /home/roboshop/${component} && mvn clean package &>>${LOG_FILE} && mv target/${component}-1.0.jar ${component}.jar &>>${LOG_FILE}
+STAT_CHECK $? "Compile the Java Code"
+
+SYSTEMD_SETUP
+
+}
 
 
 #===============================================
