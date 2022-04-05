@@ -19,7 +19,7 @@
 #   ls -ltr
 #----------------------
 i=1
-for user in 'awk -F: '{print $1}' /etc/passwd;' do
+for user in 'awk -F: '{print $1}' /etc/passwd' do
   echo "user $((i++))"  $user
   done
 #-----------------
