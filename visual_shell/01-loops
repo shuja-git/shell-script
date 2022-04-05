@@ -12,4 +12,5 @@
 for i in {1..5};do
   echo "files created : "  ${i}
    touch $i
+   ls -l
   done
