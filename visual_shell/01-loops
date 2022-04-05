@@ -18,17 +18,20 @@
 #   done
 #   ls -ltr
 #----------------------
-i=1
-for user in `awk -F: '{print $1}' /etc/passwd`; do
-  echo "user $((i++))"  $user
-  done
-#-----------------
+#List all users one by one in /etc/passwd file
 #i=1
-#for username in `awk -F: '{print $1}' /etc/passwd`
-#do
-# echo "Username $((i++)) : $username"
-#done
+#for user in `awk -F: '{print $1}' /etc/passwd`; do
+#  echo "user $((i++))"  $user
+#  done
+#-----------------
 
+# do while loop
+c=1
+while [ $c -le 5 ]
+do
+        echo "Welcone $c times"
+        (( c++ ))
+done
 
 
 
