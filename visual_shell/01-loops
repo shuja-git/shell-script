@@ -18,15 +18,16 @@
 #   done
 #   ls -ltr
 #----------------------
-#for user in 'awk -F: '{print $1}' /etc/passwd'; do
-#  echo $user
-#  done
-#-----------------
 i=1
-for username in `awk -F: '{print $1}' /etc/passwd`
-do
- echo "Username $((i++)) : $username"
-done
+for user in 'awk -F: '{print $1}' /etc/passwd'; do
+  echo "user $((i++))"  $user
+  done
+#-----------------
+#i=1
+#for username in `awk -F: '{print $1}' /etc/passwd`
+#do
+# echo "Username $((i++)) : $username"
+#done
 
 
 
