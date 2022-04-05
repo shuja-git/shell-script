@@ -1,16 +1,30 @@
 #!/bin/bash
 
+#Display weekdays
 #i=1
 #for day in Mon Tue Wed Thu Fri; do
 #echo "Weekdays : $((i++)) : " ${day}
 #done
-
+#---------
+#Delete 5 files
 #for i in {1..5}; do
 # rm ${i}
 #done
+#--------------------
+#Create 5 files
+#for i in {1..5};do
+#  echo "files created : "  ${i}
+#   touch $i
+#   done
+#   ls -ltr
+#----------------------
+for user in awk -F ":" '{print $1}'; do
+  echo $user
+  done
 
-for i in {1..5};do
-  echo "files created : "  ${i}
-   touch $i
-   done
-   ls -ltr
+
+
+
+
+
+
