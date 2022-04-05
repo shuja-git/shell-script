@@ -45,8 +45,8 @@ do
         echo
         sleep 1
 
-num=$num - 1
-count=$count + 1
+num=`expr $num - 1`
+count=`expr $count + 1`
 done
 echo
 echo $1 process is stopped!!!
