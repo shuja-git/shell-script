@@ -10,5 +10,6 @@
 #done
 
 for i in {1..5};do
-  echo "files created : " touch ${i}
+  echo "files created : "  ${i}
+   touch $i
   done
