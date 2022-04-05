@@ -18,7 +18,7 @@
 #   done
 #   ls -ltr
 #----------------------
-for user in "awk -F ':' '{print $1}'"; do
+for user in 'awk -F: '{print $1}' /etc/passwd'; do
   echo $user
   done
 
