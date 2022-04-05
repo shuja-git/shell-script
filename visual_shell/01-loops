@@ -5,8 +5,10 @@
 #echo "Weekdays : $((i++)) : " ${day}
 #done
 
-for i in {1..5}; do
- rm ${i}
-done
+#for i in {1..5}; do
+# rm ${i}
+#done
 
-
+for i in {1..5};do
+  echo touch ${i}
+  done
