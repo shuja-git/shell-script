@@ -1,3 +1,2 @@
 # shell-script
-# testing comment
-##
+#
