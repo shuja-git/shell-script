@@ -1,6 +1,12 @@
 #!/bin/bash
 
-i=1
-for day in Mon Tue Wed Thu Fri; do
-echo "Weekdays : $((i++)) : " ${day}
+#i=1
+#for day in Mon Tue Wed Thu Fri; do
+#echo "Weekdays : $((i++)) : " ${day}
+#done
+
+for i in {1..5}; do
+ rm ${i}
 done
+
+
