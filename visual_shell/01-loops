@@ -41,7 +41,7 @@ num=10
 while [ $count -lt 10 ]
 do
         echo
-        echo $num seconds left to stop this process $1
+        echo $num seconds left to stop this process
         echo
         sleep 1
 
